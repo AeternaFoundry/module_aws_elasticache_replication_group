@@ -9,6 +9,8 @@ Optional:
     - at_rest_encryption_enabled
     - auth_token
     - auth_token_update_strategy
+    - auth_token_wo
+    - auth_token_wo_version
     - auto_minor_version_upgrade
     - automatic_failover_enabled
     - cluster_mode
@@ -62,6 +64,7 @@ EOT
   type = map(object({
     description                 = string
     replication_group_id        = string
+    num_cache_clusters          = optional(number)
     num_node_groups             = optional(number)
     parameter_group_name        = optional(string)
     port                        = optional(number)
@@ -78,18 +81,20 @@ EOT
     tags                        = optional(map(string))
     tags_all                    = optional(map(string))
     transit_encryption_enabled  = optional(bool)
-    num_cache_clusters          = optional(number)
     notification_topic_arn      = optional(string)
     node_type                   = optional(string)
     network_type                = optional(string)
+    multi_az_enabled            = optional(bool)
     apply_immediately           = optional(bool)
     at_rest_encryption_enabled  = optional(string)
     auth_token                  = optional(string)
     auth_token_update_strategy  = optional(string)
+    auth_token_wo               = optional(string)
+    auth_token_wo_version       = optional(number)
     auto_minor_version_upgrade  = optional(string)
     automatic_failover_enabled  = optional(bool)
+    transit_encryption_mode     = optional(string)
     cluster_mode                = optional(string)
-    data_tiering_enabled        = optional(bool)
     durability                  = optional(string)
     engine                      = optional(string)
     engine_version              = optional(string)
@@ -98,8 +103,7 @@ EOT
     ip_discovery                = optional(string)
     kms_key_id                  = optional(string)
     maintenance_window          = optional(string)
-    multi_az_enabled            = optional(bool)
-    transit_encryption_mode     = optional(string)
+    data_tiering_enabled        = optional(bool)
     user_group_ids              = optional(set(string))
     log_delivery_configuration = optional(list(object({
       destination      = string
@@ -165,6 +169,6 @@ EOT
     ])
     error_message = "must be at most 35"
   }
-  # Note: 22 additional provider-side validators are enforced at apply time but not mirrored as validation{} blocks here (bespoke or non-mechanically-translatable).
+  # Note: 24 additional provider-side validators are enforced at apply time but not mirrored as validation{} blocks here (bespoke or non-mechanically-translatable).
 }
 

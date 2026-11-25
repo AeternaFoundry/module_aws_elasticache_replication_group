@@ -3,6 +3,7 @@ resource "aws_elasticache_replication_group" "elasticache_replication_groups" {
 
   description                 = each.value.description
   replication_group_id        = each.value.replication_group_id
+  num_cache_clusters          = each.value.num_cache_clusters
   num_node_groups             = each.value.num_node_groups
   parameter_group_name        = each.value.parameter_group_name
   port                        = each.value.port
@@ -19,18 +20,20 @@ resource "aws_elasticache_replication_group" "elasticache_replication_groups" {
   tags                        = each.value.tags
   tags_all                    = each.value.tags_all
   transit_encryption_enabled  = each.value.transit_encryption_enabled
-  num_cache_clusters          = each.value.num_cache_clusters
   notification_topic_arn      = each.value.notification_topic_arn
   node_type                   = each.value.node_type
   network_type                = each.value.network_type
+  multi_az_enabled            = each.value.multi_az_enabled
   apply_immediately           = each.value.apply_immediately
   at_rest_encryption_enabled  = each.value.at_rest_encryption_enabled
   auth_token                  = each.value.auth_token
   auth_token_update_strategy  = each.value.auth_token_update_strategy
+  auth_token_wo               = each.value.auth_token_wo
+  auth_token_wo_version       = each.value.auth_token_wo_version
   auto_minor_version_upgrade  = each.value.auto_minor_version_upgrade
   automatic_failover_enabled  = each.value.automatic_failover_enabled
+  transit_encryption_mode     = each.value.transit_encryption_mode
   cluster_mode                = each.value.cluster_mode
-  data_tiering_enabled        = each.value.data_tiering_enabled
   durability                  = each.value.durability
   engine                      = each.value.engine
   engine_version              = each.value.engine_version
@@ -39,8 +42,7 @@ resource "aws_elasticache_replication_group" "elasticache_replication_groups" {
   ip_discovery                = each.value.ip_discovery
   kms_key_id                  = each.value.kms_key_id
   maintenance_window          = each.value.maintenance_window
-  multi_az_enabled            = each.value.multi_az_enabled
-  transit_encryption_mode     = each.value.transit_encryption_mode
+  data_tiering_enabled        = each.value.data_tiering_enabled
   user_group_ids              = each.value.user_group_ids
 
   dynamic "log_delivery_configuration" {

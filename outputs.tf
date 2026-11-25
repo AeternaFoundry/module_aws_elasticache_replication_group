@@ -23,6 +23,15 @@ output "elasticache_replication_groups_auth_token_update_strategy" {
   description = "Map of auth_token_update_strategy values across all elasticache_replication_groups, keyed the same as var.elasticache_replication_groups"
   value       = { for k, v in aws_elasticache_replication_group.elasticache_replication_groups : k => v.auth_token_update_strategy if v.auth_token_update_strategy != null && length(v.auth_token_update_strategy) > 0 }
 }
+output "elasticache_replication_groups_auth_token_wo" {
+  description = "Map of auth_token_wo values across all elasticache_replication_groups, keyed the same as var.elasticache_replication_groups"
+  value       = { for k, v in aws_elasticache_replication_group.elasticache_replication_groups : k => v.auth_token_wo if v.auth_token_wo != null && length(v.auth_token_wo) > 0 }
+  sensitive   = true
+}
+output "elasticache_replication_groups_auth_token_wo_version" {
+  description = "Map of auth_token_wo_version values across all elasticache_replication_groups, keyed the same as var.elasticache_replication_groups"
+  value       = { for k, v in aws_elasticache_replication_group.elasticache_replication_groups : k => v.auth_token_wo_version if v.auth_token_wo_version != null }
+}
 output "elasticache_replication_groups_auto_minor_version_upgrade" {
   description = "Map of auto_minor_version_upgrade values across all elasticache_replication_groups, keyed the same as var.elasticache_replication_groups"
   value       = { for k, v in aws_elasticache_replication_group.elasticache_replication_groups : k => v.auto_minor_version_upgrade if v.auto_minor_version_upgrade != null && length(v.auto_minor_version_upgrade) > 0 }
